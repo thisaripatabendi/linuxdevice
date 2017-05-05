@@ -122,6 +122,7 @@ function drawGraph_linuxdevice(from, to)
         dataset = data;
 
         Deviceids = new Array();
+        DeviceNames = new Array();
         timeforXAxis = new Array();
         maxCountForXAxis = 0;
 
@@ -132,6 +133,10 @@ function drawGraph_linuxdevice(from, to)
 
             if (! Deviceids.includes(temp.values.meta_deviceId)){
                 Deviceids.push(temp.values.meta_deviceId);
+            }
+
+            if (! DeviceNames.includes(temp.values.meta_deviceName)){
+                DeviceNames.push(temp.values.meta_deviceName);
             }
 
             if(! timeforXAxis.includes(temp.values.meta_time)){
@@ -171,23 +176,10 @@ function drawGraph_linuxdevice(from, to)
 
             }
 
-            // TODO - pick a one color for one device to show in all graphs
-//            var linecolor = getRandomColor();
-//            var colorANDdevice = {Deviceids[d]: linecolor};
-//            DeviceidsANDcolors.push(colorANDdevice);
-//
-//            for(int c = 0 ; c < DeviceidsANDcolors.length ; c ++){
-//                if (DeviceidsANDcolors.Deviceids[d] == Deviceids[d]){
-//                    var color = DeviceidsANDcolors.linecolor;
-//
-//                    return color;
-//                }
-//            }
-
             series.push({
                 color: getRandomColor(),
                 data: device,
-                name: Deviceids[d]
+                name: DeviceNames[d]
             });
 
         }
