@@ -48,6 +48,9 @@ git clone git://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.python.git
 cd org.eclipse.paho.mqtt.python
 sudo python setup.py install
 
+sudo apt install python-pip
+sudo pip install paho-mqtt
+
 cd $currentDir
 
 #while true; do
