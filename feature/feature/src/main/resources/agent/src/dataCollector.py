@@ -21,11 +21,18 @@
 import subprocess
 
 import multiprocessing
+import os
 
 
 def getBatteryLevel():
 
-    read_battery_level = open('/sys/class/power_supply/BAT0/capacity', 'r')
+    fileexist = os.path.isfile('/sys/class/power_supply/BAT0/capacity')
+
+    if fileexist is True:
+        read_battery_level = open('/sys/class/power_supply/BAT0/capacity', 'r')
+    else:
+        read_battery_level = open('/sys/class/power_supply/BAT1/capacity', 'r')
+
     battery_level = read_battery_level.read()
     read_battery_level.close()
 
@@ -43,7 +50,13 @@ def getBatteryLevel():
 
 def getBatteryStatus():
 
-    read_battery_status = open('/sys/class/power_supply/BAT0/status', 'r')
+    fileexist = os.path.isfile('/sys/class/power_supply/BAT0/status')
+
+    if fileexist is True:
+        read_battery_status = open('/sys/class/power_supply/BAT0/status', 'r')
+    else:
+        read_battery_status = open('/sys/class/power_supply/BAT1/status', 'r')
+
     battery_status = read_battery_status.read()
     read_battery_status.close()
     battery_status = battery_status.split(' ')[0]
