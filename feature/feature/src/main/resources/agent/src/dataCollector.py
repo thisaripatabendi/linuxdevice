@@ -18,10 +18,10 @@
 * under the License.
 **/
 """
-import subprocess
 
 import multiprocessing
 import os
+import subprocess
 
 
 def getBatteryLevel():
@@ -116,3 +116,45 @@ def getCPUUsage():
     percentage = round(percentage, 2)
 
     return percentage
+
+def getDiskSpace():
+
+    df = subprocess.Popen(["df", "/home/"], stdout=subprocess.PIPE)
+    output = df.communicate()[0]
+
+    details = output.split("\n")[1].split()
+
+    df1 = subprocess.Popen(["df", "/"], stdout=subprocess.PIPE)
+    output1 = df1.communicate()[0]
+
+    details1 = output1.split("\n")[1].split()
+
+    percentage = ((float(details[3]) + float(details1[3])) * 100) / (float(details[1]) + float(details1[1]))
+    #return "%.2f" % round(percentage, 2)
+    total = (float(details[1]) + float(details1[1])) / 1000000
+    return "%.2f" % round(total, 2)
+
+def getMemorySpace():
+
+    proc = subprocess.Popen(["cat", "/proc/meminfo"], stdout=subprocess.PIPE)
+    out, err = proc.communicate()
+
+    total_memoey = 0
+    free_memory = 0
+
+    for line in out.split("\n"):
+
+        if "MemTotal" in line:
+            total = line.split(":")[1].replace(" ", "")
+            total_memoey = float(total.split("k")[0])
+            print total_memoey
+
+        if "MemAvailable" in line:
+            free = line.split(":")[1].replace(" ", "")
+            free_memory = float(free.split("k")[0])
+            print free_memory
+
+    percentage = (free_memory * 100) / total_memoey
+    #return "%.2f" % round(percentage, 2)
+    return "%.2f" % round((free_memory/1000), 2)
+

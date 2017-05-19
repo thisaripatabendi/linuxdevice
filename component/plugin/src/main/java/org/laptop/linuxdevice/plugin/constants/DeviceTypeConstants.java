@@ -43,6 +43,8 @@ public class DeviceTypeConstants {
     public static final String SENSOR_TYPE2_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_BATTERYSTATUSSENSOR";
     //cpuusage
     public static final String SENSOR_TYPE3_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_CPUUSAGESENSOR";
+    public static final String SENSOR_TYPE4_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_MEMORYSPACESENSOR";
+    public static final String SENSOR_TYPE5_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_DISKSPACESENSOR";
 
     public static final String DATA_SOURCE_NAME = "jdbc/linuxdeviceDM_DB";
     public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
@@ -50,6 +52,8 @@ public class DeviceTypeConstants {
     public final static String SENSOR_TYPE2 = "batterystatussensor";
     //cpuusage
     public final static String SENSOR_TYPE3 = "cpuusagesensor";
+    public final static String SENSOR_TYPE4 = "memoryspacesensor";
+    public final static String SENSOR_TYPE5 = "diskspacesensor";
 
     //mqtt tranport related constants
     public static final String MQTT_ADAPTER_NAME = "batterylevelsensor_mqtt";

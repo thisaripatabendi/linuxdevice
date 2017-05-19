@@ -119,8 +119,10 @@ def connectAndPushData():
     battery_level = float(iotUtils.BATTERY_LEVEL)
     battery_status = float(iotUtils.BATTERY_STATUS)
     cpuusage = float(iotUtils.CPU_USAGE)
+    memory_space = float(iotUtils.MEMORY_SPACE)
+    disk_space = float(iotUtils.DISK_SPACE)
 
-    PUSH_DATA = iotUtils.DEVICE_INFO.format(currentTime, battery_level, battery_status, cpuusage)
+    PUSH_DATA = iotUtils.DEVICE_INFO.format(currentTime, battery_level, battery_status, cpuusage, memory_space, disk_space)
 
     print '~~~~~~~~~~~~~~~~~~~~~~~~ Publishing Device-Data ~~~~~~~~~~~~~~~~~~~~~~~~~'
     print ('PUBLISHED DATA: ' + PUSH_DATA)
@@ -138,6 +140,8 @@ def collectData():
     iotUtils.BATTERY_LEVEL = getBatteryLevel()
     iotUtils.BATTERY_STATUS = getBatteryStatus()
     iotUtils.CPU_USAGE = getCPUUsage()
+    iotUtils.MEMORY_SPACE = getMemorySpace()
+    iotUtils.DISK_SPACE = getDiskSpace()
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -149,6 +153,8 @@ def generateRandoms():
     iotUtils.BATTERY_STATUS = random.randrange(-1, 2)
     iotUtils.BATTERY_LEVEL = random.randrange(20, 100)
     iotUtils.CPU_USAGE = random.randrange(20, 100)
+    iotUtils.MEMORY_SPACE = random.randrange(10, 70)
+    iotUtils.DISK_SPACE = random.randrange(10, 70)
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -214,11 +220,13 @@ class DataReaderThread(object):
                     # generate random values
                     generateRandoms()
 
-                #print "############ DATA READINGS ###############"
-                #print 'BATTERY LEVEL : ' + str(iotUtils.BATTERY_LEVEL)
-                #print 'BATTERY STATUS : ' + str(iotUtils.BATTERY_STATUS)
-                #print 'CPU USAGE : ' + str(iotUtils.CPU_USAGE)
-                #print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                print "############ DATA READINGS ###############"
+                print 'BATTERY LEVEL : ' + str(iotUtils.BATTERY_LEVEL)
+                print 'BATTERY STATUS : ' + str(iotUtils.BATTERY_STATUS)
+                print 'CPU USAGE : ' + str(iotUtils.CPU_USAGE)
+                print 'MEMORY SPACE : ' + str(iotUtils.MEMORY_SPACE)
+                print 'DISK SPACE : ' + str(iotUtils.DISK_SPACE)
+                print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
                 print " "
 
             except Exception, e:

@@ -47,13 +47,17 @@ function onRequest(context) {
     //cpuusage
     //var websocketEndpointForStream3 = websocketEndpoint + "/secured-websocket/org.wso2.iot.devices.cpuusagesensor/1.0.0?deviceId=" + device.deviceIdentifier + "&deviceType=" + device.type;
     var websocketEndpointForStream3 = "wss://localhost:9445/outputwebsocket/EventPublishercpuusagesensor";
+    var websocketEndpointForStream4 = "wss://localhost:9445/outputwebsocket/EventPublishermemoryspacesensor";
+    var websocketEndpointForStream5 = "wss://localhost:9445/outputwebsocket/EventPublisherdiskspacesensor";
 
 	return {
 		"device": device,
 		"websocketEndpointForStream1": websocketEndpointForStream1,
 		"websocketEndpointForStream2": websocketEndpointForStream2,
 		//cpuusage
-		"websocketEndpointForStream3": websocketEndpointForStream3
+		"websocketEndpointForStream3": websocketEndpointForStream3,
+		"websocketEndpointForStream4": websocketEndpointForStream4,
+		"websocketEndpointForStream5": websocketEndpointForStream5
 	};
 }
 

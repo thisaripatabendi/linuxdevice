@@ -22,11 +22,14 @@ var sensorType1 = "batterylevelsensor";
 var sensorType2 = "batterystatussensor";
 //cpuusage
 var sensorType3 = "cpuusagesensor";
+var sensorType4 = "memoryspacesensor";
+var sensorType5 = "diskspacesensor";
 var sensorType1Graph;
 var sensorType2Graph;
 //cpuusage
 var sensorType3Graph;
-
+var sensorType4Graph;
+var sensorType5Graph;
 
 function drawGraph_linuxdevice(from, to)
 {
@@ -91,6 +94,44 @@ function drawGraph_linuxdevice(from, to)
     };
 
     invokerUtil.get(backendApiUrl3, successCallback3, function (message) {
+        console.log(message);
+    });
+
+    //graph4
+    var chart4 = "chartSensorType4";
+    var backendApiUrl4 = $("#" + chart4 + "").data("backend-api-url") + "?from=" + from + "&to=" + to
+            + "&sensorType=" + sensorType4;
+    var successCallback4 = function (data) {
+        dataset = JSON.parse(data);
+
+        //graph4
+        var graphConfigSensorType4 = getGraphConfig(dataset, sensorType4, "chartSensorType4");
+        sensorType4Graph = new Rickshaw.Graph(graphConfigSensorType4);
+        drawGraph(sensorType4Graph, "sensorType4yAxis", "sensorType4Slider", "sensorType4Legend", sensorType4
+            , graphConfigSensorType4, "chartSensorType4");
+
+    };
+
+    invokerUtil.get(backendApiUrl4, successCallback4, function (message) {
+        console.log(message);
+    });
+
+    //graph5
+    var chart5 = "chartSensorType5";
+    var backendApiUrl5 = $("#" + chart5 + "").data("backend-api-url") + "?from=" + from + "&to=" + to
+            + "&sensorType=" + sensorType5;
+    var successCallback5 = function (data) {
+        dataset = JSON.parse(data);
+
+        //graph5
+        var graphConfigSensorType5 = getGraphConfig(dataset, sensorType5, "chartSensorType5");
+        sensorType5Graph = new Rickshaw.Graph(graphConfigSensorType5);
+        drawGraph(sensorType5Graph, "sensorType5yAxis", "sensorType5Slider", "sensorType5Legend", sensorType5
+            , graphConfigSensorType5, "chartSensorType5");
+
+    };
+
+    invokerUtil.get(backendApiUrl5, successCallback5, function (message) {
         console.log(message);
     });
 
@@ -163,8 +204,12 @@ function drawGraph_linuxdevice(from, to)
                     value = dataset[z].values.batterylevelsensor;
                 }else if (placeHolder == "chartSensorType2"){
                     value = dataset[z].values.batterystatussensor;
-                }else{
+                }else if (placeHolder == "chartSensorType3"){
                     value = dataset[z].values.cpuusagesensor;
+                }else if (placeHolder == "chartSensorType4"){
+                    value = dataset[z].values.memoryspacesensor;
+                }else{
+                    value = dataset[z].values.diskspacesensor;
                 }
 
                 value = parseFloat(value);value;
