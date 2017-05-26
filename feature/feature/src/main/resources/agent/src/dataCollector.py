@@ -147,12 +147,10 @@ def getMemorySpace():
         if "MemTotal" in line:
             total = line.split(":")[1].replace(" ", "")
             total_memoey = float(total.split("k")[0])
-            print total_memoey
 
         if "MemAvailable" in line:
             free = line.split(":")[1].replace(" ", "")
             free_memory = float(free.split("k")[0])
-            print free_memory
 
     percentage = (free_memory * 100) / total_memoey
     #return "%.2f" % round(percentage, 2)

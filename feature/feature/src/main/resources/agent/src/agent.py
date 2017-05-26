@@ -214,20 +214,20 @@ class DataReaderThread(object):
 
                 if running_mode.RUNNING_MODE == 'N':
                     # time.sleep(PUSH_INTERVAL)
-                    time.sleep(15)
                     collectData()
+                    time.sleep(15)
                 else:
                     # generate random values
                     generateRandoms()
 
-                print "############ DATA READINGS ###############"
-                print 'BATTERY LEVEL : ' + str(iotUtils.BATTERY_LEVEL)
-                print 'BATTERY STATUS : ' + str(iotUtils.BATTERY_STATUS)
-                print 'CPU USAGE : ' + str(iotUtils.CPU_USAGE)
-                print 'MEMORY SPACE : ' + str(iotUtils.MEMORY_SPACE)
-                print 'DISK SPACE : ' + str(iotUtils.DISK_SPACE)
-                print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-                print " "
+                # print "############ DATA READINGS ###############"
+                # print 'BATTERY LEVEL : ' + str(iotUtils.BATTERY_LEVEL)
+                # print 'BATTERY STATUS : ' + str(iotUtils.BATTERY_STATUS)
+                # print 'CPU USAGE : ' + str(iotUtils.CPU_USAGE)
+                # print 'MEMORY SPACE : ' + str(iotUtils.MEMORY_SPACE)
+                # print 'DISK SPACE : ' + str(iotUtils.DISK_SPACE)
+                # print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                # print " "
 
             except Exception, e:
                 print '~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~'
@@ -250,6 +250,8 @@ def main():
     DataReaderThread()  # initiates and runs the thread to continuously read temperature from DHT Sensor
 
     # test
+
+    time.sleep(10)
     while True:
         try:
             if iotUtils.BATTERY_LEVEL > 0:  # Push data only if there had been a successful temperature read
