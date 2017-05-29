@@ -50,7 +50,7 @@ function drawGraph_linuxdevice(from, to)
             height: 400,
             strokeWidth: 2,
             renderer: 'line',
-            interpolation: "linear",
+            //interpolation: "linear",
             unstack: true,
             stack: false,
             xScale: d3.time.scale(),
