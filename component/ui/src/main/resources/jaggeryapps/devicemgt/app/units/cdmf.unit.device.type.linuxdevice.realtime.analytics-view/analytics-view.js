@@ -49,6 +49,7 @@ function onRequest(context) {
     var websocketEndpointForStream3 = "wss://localhost:9445/outputwebsocket/EventPublishercpuusagesensor";
     var websocketEndpointForStream4 = "wss://localhost:9445/outputwebsocket/EventPublishermemoryspacesensor";
     var websocketEndpointForStream5 = "wss://localhost:9445/outputwebsocket/EventPublisherdiskspacesensor";
+    var websocketEndpointForStream6 = "wss://localhost:9445/outputwebsocket/EventPublisherloadaveragesensor";
 
 	return {
 		"device": device,
@@ -57,7 +58,8 @@ function onRequest(context) {
 		//cpuusage
 		"websocketEndpointForStream3": websocketEndpointForStream3,
 		"websocketEndpointForStream4": websocketEndpointForStream4,
-		"websocketEndpointForStream5": websocketEndpointForStream5
+		"websocketEndpointForStream5": websocketEndpointForStream5,
+		"websocketEndpointForStream6": websocketEndpointForStream6
 	};
 }
 

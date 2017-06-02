@@ -45,6 +45,7 @@ public class DeviceTypeConstants {
     public static final String SENSOR_TYPE3_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_CPUUSAGESENSOR";
     public static final String SENSOR_TYPE4_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_MEMORYSPACESENSOR";
     public static final String SENSOR_TYPE5_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_DISKSPACESENSOR";
+    public static final String SENSOR_TYPE6_EVENT_TABLE = "ORG_WSO2_IOT_DEVICES_LOADAVERAGESENSOR";
 
     public static final String DATA_SOURCE_NAME = "jdbc/linuxdeviceDM_DB";
     public final static String DEVICE_TYPE_PROVIDER_DOMAIN = "carbon.super";
@@ -54,6 +55,7 @@ public class DeviceTypeConstants {
     public final static String SENSOR_TYPE3 = "cpuusagesensor";
     public final static String SENSOR_TYPE4 = "memoryspacesensor";
     public final static String SENSOR_TYPE5 = "diskspacesensor";
+    public final static String SENSOR_TYPE6 = "loadaveragesensor";
 
     //mqtt tranport related constants
     public static final String MQTT_ADAPTER_NAME = "batterylevelsensor_mqtt";
@@ -88,6 +90,15 @@ public class DeviceTypeConstants {
     //cpuusage
     public final static String SENSOR_TYPE3_STREAM_DEFINITION = "org.wso2.iot.devices.cpuusagesensor";
     public final static String SENSOR_TYPE3_STREAM_DEFINITION_VERSION = "1.0.0";
+
+    public final static String SENSOR_TYPE4_STREAM_DEFINITION = "org.wso2.iot.devices.memoryspacesensor";
+    public final static String SENSOR_TYPE4_STREAM_DEFINITION_VERSION = "1.0.0";
+
+    public final static String SENSOR_TYPE5_STREAM_DEFINITION = "org.wso2.iot.devices.diskspacesensor";
+    public final static String SENSOR_TYPE5_STREAM_DEFINITION_VERSION = "1.0.0";
+
+    public final static String SENSOR_TYPE6_STREAM_DEFINITION = "org.wso2.iot.devices.loadaveragesensor";
+    public final static String SENSOR_TYPE6_STREAM_DEFINITION_VERSION = "1.0.0";
 
     public static final String MQTT_CONFIG_LOCATION = CarbonUtils.getEtcCarbonConfigDirPath() + File.separator
             + "mqtt.properties";

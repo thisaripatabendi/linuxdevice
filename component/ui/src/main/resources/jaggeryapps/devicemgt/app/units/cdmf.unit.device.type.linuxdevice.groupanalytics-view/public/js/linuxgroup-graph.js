@@ -24,12 +24,14 @@ var sensorType2 = "batterystatussensor";
 var sensorType3 = "cpuusagesensor";
 var sensorType4 = "memoryspacesensor";
 var sensorType5 = "diskspacesensor";
+var sensorType6 = "loadaveragesensor";
 var sensorType1Graph;
 var sensorType2Graph;
 //cpuusage
 var sensorType3Graph;
 var sensorType4Graph;
 var sensorType5Graph;
+var sensorType6Graph;
 
 function drawGraph_linuxdevice(from, to)
 {
@@ -135,6 +137,25 @@ function drawGraph_linuxdevice(from, to)
         console.log(message);
     });
 
+    //graph6
+    var chart6 = "chartSensorType6";
+    var backendApiUrl6 = $("#" + chart6 + "").data("backend-api-url") + "?from=" + from + "&to=" + to
+            + "&sensorType=" + sensorType6;
+    var successCallback6 = function (data) {
+        dataset = JSON.parse(data);
+
+        //graph6
+        var graphConfigSensorType6 = getGraphConfig(dataset, sensorType6, "chartSensorType6");
+        sensorType6Graph = new Rickshaw.Graph(graphConfigSensorType6);
+        drawGraph(sensorType6Graph, "sensorType6yAxis", "sensorType6Slider", "sensorType6Legend", sensorType6
+            , graphConfigSensorType6, "chartSensorType6");
+
+    };
+
+    invokerUtil.get(backendApiUrl6, successCallback6, function (message) {
+        console.log(message);
+    });
+
     function getGraphConfig(dataset, sensorType, placeHolder) {
         return {
 
@@ -208,8 +229,10 @@ function drawGraph_linuxdevice(from, to)
                     value = dataset[z].values.cpuusagesensor;
                 }else if (placeHolder == "chartSensorType4"){
                     value = dataset[z].values.memoryspacesensor;
-                }else{
+                }else if (placeHolder == "chartSensorType5"){
                     value = dataset[z].values.diskspacesensor;
+                }else{
+                    value = dataset[z].values.loadaveragesensor;
                 }
 
                 value = parseFloat(value);value;

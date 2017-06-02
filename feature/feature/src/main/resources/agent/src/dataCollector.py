@@ -156,3 +156,10 @@ def getMemorySpace():
     #return "%.2f" % round(percentage, 2)
     return "%.2f" % round((free_memory/1000), 2)
 
+def getLoadAverage():
+
+    average = os.getloadavg()
+    load_average = str(average).split(", ")[0].replace("(", "")
+
+    return float(load_average)
+

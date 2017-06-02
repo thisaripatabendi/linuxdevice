@@ -22,6 +22,7 @@ var wsConnection2;
 var wsConnection3;
 var wsConnection4;
 var wsConnection5;
+var wsConnection6;
 
 var graphForSensorType1;
 var graphForSensorType2;
@@ -29,6 +30,7 @@ var graphForSensorType2;
 var graphForSensorType3;
 var graphForSensorType4;
 var graphForSensorType5;
+var graphForSensorType6;
 
 var chartDataSensorType1 = [];
 var chartDataSensorType2 = [];
@@ -36,6 +38,7 @@ var chartDataSensorType2 = [];
 var chartDataSensorType3 = [];
 var chartDataSensorType4 = [];
 var chartDataSensorType5 = [];
+var chartDataSensorType6 = [];
 
 var palette = new Rickshaw.Color.Palette({scheme: "classic9"});
 
@@ -104,6 +107,8 @@ $(window).load(function () {
         , graphForSensorType4);
     drawGraph(wsConnection5, "#div-chart-sensorType5", "yAxisSensorType5", "chartSensorType5", chartDataSensorType5
         , graphForSensorType5);
+    drawGraph(wsConnection6, "#div-chart-sensorType6", "yAxisSensorType6", "chartSensorType6", chartDataSensorType6
+        , graphForSensorType6);
 });
 
 $(window).unload(function () {
@@ -113,6 +118,7 @@ $(window).unload(function () {
     disconnect(wsConnection3);
     disconnect(wsConnection4);
     disconnect(wsConnection5);
+    disconnect(wsConnection6);
 });
 
 //websocket connection
@@ -133,15 +139,17 @@ function connect(wsConnection, target, chartData, graph, deviceId) {
             // check with the deviceID and payload
             if(currentDevId == deviceId){
                 if(dataPoint.event.payloadData.batterylevelsensor !== undefined){
-                    value = value = dataPoint.event.payloadData.batterylevelsensor;
+                    value = dataPoint.event.payloadData.batterylevelsensor;
                 }else if (dataPoint.event.payloadData.batterystatussensor !== undefined){
-                    value = value = dataPoint.event.payloadData.batterystatussensor;
+                    value = dataPoint.event.payloadData.batterystatussensor;
                 }else if (dataPoint.event.payloadData.cpuusagesensor !== undefined){
-                    value = value = dataPoint.event.payloadData.cpuusagesensor;
+                    value = dataPoint.event.payloadData.cpuusagesensor;
                 }else if (dataPoint.event.payloadData.memoryspacesensor !== undefined){
-                    value = value = dataPoint.event.payloadData.memoryspacesensor;
+                    value = dataPoint.event.payloadData.memoryspacesensor;
+                }else if (dataPoint.event.payloadData.diskspacesensor !== undefined){
+                    value = dataPoint.event.payloadData.diskspacesensor;
                 }else{
-                    value = value = dataPoint.event.payloadData.diskspacesensor;
+                    value = dataPoint.event.payloadData.loadaveragesensor;
                 }
 
                 chartData.push({

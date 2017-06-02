@@ -7,7 +7,7 @@
 /* define streams/tables and write queries here ... */
 
 @Import('org.wso2.iot.laptop:1.0.0')
-define stream laptop (meta_owner string, meta_deviceId string, meta_deviceName string, meta_time long, batterylevelsensor float, batterystatussensor float, cpuusagesensor float, memoryspacesensor float, diskspacesensor float);
+define stream laptop (meta_owner string, meta_deviceId string, meta_deviceName string, meta_time long, batterylevelsensor float, batterystatussensor float, cpuusagesensor float, memoryspacesensor float, diskspacesensor float, loadaveragesensor float);
 
 @Export('org.wso2.iot.devices.batterylevelsensor:1.0.0')
 define stream batterylevelsensor (meta_owner string, meta_deviceType string, meta_deviceId string, meta_deviceName string, meta_time long, batterylevelsensor float);
@@ -23,6 +23,9 @@ define stream memoryspacesensor (meta_owner string, meta_deviceType string, meta
 
 @Export('org.wso2.iot.devices.diskspacesensor:1.0.0')
 define stream diskspacesensor (meta_owner string, meta_deviceType string, meta_deviceId string, meta_deviceName string, meta_time long, diskspacesensor float);
+
+@Export('org.wso2.iot.devices.loadaveragesensor:1.0.0')
+define stream loadaveragesensor (meta_owner string, meta_deviceType string, meta_deviceId string, meta_deviceName string, meta_time long, loadaveragesensor float);
 
 from laptop
 select meta_owner, 'linuxdevice' as meta_deviceType, meta_deviceId, meta_deviceName, meta_time * 1000 as meta_time, batterylevelsensor
@@ -43,6 +46,10 @@ insert into memoryspacesensor;
 from laptop
 select meta_owner, 'linuxdevice' as meta_deviceType, meta_deviceId, meta_deviceName, meta_time * 1000 as meta_time, diskspacesensor
 insert into diskspacesensor;
+
+from laptop
+select meta_owner, 'linuxdevice' as meta_deviceType, meta_deviceId, meta_deviceName, meta_time * 1000 as meta_time, loadaveragesensor
+insert into loadaveragesensor;
 
 
 

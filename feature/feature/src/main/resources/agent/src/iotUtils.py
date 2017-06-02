@@ -47,6 +47,8 @@ global MEMORY_SPACE
 MEMORY_SPACE = 0
 global DISK_SPACE
 DISK_SPACE = 0
+global LOAD_AVERAGE
+LOAD_AVERAGE = 0
 
 # Linux Agent
 DATA_READING_INTERVAL_REAL_MODE = 3
@@ -73,7 +75,7 @@ AUTH_TOKEN = configParser.get('Device-Configurations', 'auth-token')
 CONTROLLER_CONTEXT = configParser.get('Device-Configurations', 'controller-context')
 # MQTT_SUB_TOPIC = configParser.get('Device-Configurations', 'mqtt-sub-topic').format(owner = DEVICE_OWNER, deviceId = DEVICE_ID)
 # MQTT_PUB_TOPIC = configParser.get('Device-Configurations', 'mqtt-pub-topic').format(owner = DEVICE_OWNER, deviceId = DEVICE_ID)
-DEVICE_INFO = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","type":"linuxdevice","deviceId":"' + DEVICE_ID + '","deviceName":"' + DEVICE_NAME + '","time":{}}},"payloadData":{{"batterylevelsensor":{:.2f}, "batterystatussensor":{:.2f}, "cpuusagesensor":{:.2f}, "memoryspacesensor":{:.2f}, "diskspacesensor":{:.2f}}}}}}}'
+DEVICE_INFO = '{{"event":{{"metaData":{{"owner":"' + DEVICE_OWNER + '","type":"linuxdevice","deviceId":"' + DEVICE_ID + '","deviceName":"' + DEVICE_NAME + '","time":{}}},"payloadData":{{"batterylevelsensor":{:.2f}, "batterystatussensor":{:.2f}, "cpuusagesensor":{:.2f}, "memoryspacesensor":{:.2f}, "diskspacesensor":{:.2f}, "loadaveragesensor":{:.2f}}}}}}}'
 
 HTTPS_EP = configParser.get('Device-Configurations', 'https-ep')
 # HTTP_EP = configParser.get('Device-Configurations', 'http-ep')

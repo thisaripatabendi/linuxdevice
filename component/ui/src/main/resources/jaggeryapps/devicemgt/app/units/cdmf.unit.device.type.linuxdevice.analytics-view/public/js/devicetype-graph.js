@@ -23,12 +23,14 @@ var sensorType2 = "batterystatussensor";
 var sensorType3 = "cpuusagesensor";
 var sensorType4 = "memoryspacesensor";
 var sensorType5 = "diskspacesensor";
+var sensorType6 = "loadaveragesensor";
 var sensorType1Graph;
 var sensorType2Graph;
 //cpuusage
 var sensorType3Graph;
 var sensorType4Graph;
 var sensorType5Graph;
+var sensorType6Graph;
 
 function drawGraph_linuxdevice(from, to)
 {
@@ -42,6 +44,7 @@ function drawGraph_linuxdevice(from, to)
     var graphConfigSensorType3 = getGraphConfig("chartSensorType3");
     var graphConfigSensorType4 = getGraphConfig("chartSensorType4");
     var graphConfigSensorType5 = getGraphConfig("chartSensorType5");
+    var graphConfigSensorType6 = getGraphConfig("chartSensorType6");
 
     function getGraphConfig(placeHolder) {
         return {
@@ -50,7 +53,7 @@ function drawGraph_linuxdevice(from, to)
             height: 400,
             strokeWidth: 2,
             renderer: 'line',
-            interpolation: "linear",
+            //interpolation: "linear",
             unstack: true,
             stack: false,
             xScale: d3.time.scale(),
@@ -108,6 +111,15 @@ function drawGraph_linuxdevice(from, to)
                     }],
                     'name': devices[i].name
                 });
+            graphConfigSensorType6['series'].push(
+                {
+                    'color': palette.color(),
+                    'data': [{
+                        x: parseInt(new Date().getTime() / 1000),
+                        y: 0
+                    }],
+                    'name': devices[i].name
+                });
         }
     } else {
         graphConfigSensorType1['series'].push(
@@ -156,6 +168,15 @@ function drawGraph_linuxdevice(from, to)
                 }],
                 'name': " "
             });
+        graphConfigSensorType6['series'].push(
+            {
+                'color': palette.color(),
+                'data': [{
+                    x: parseInt(new Date().getTime() / 1000),
+                    y: 0
+                }],
+                'name': " "
+            });
     }
 
     sensorType1Graph = new Rickshaw.Graph(graphConfigSensorType1);
@@ -164,6 +185,7 @@ function drawGraph_linuxdevice(from, to)
     sensorType3Graph = new Rickshaw.Graph(graphConfigSensorType3);
     sensorType4Graph = new Rickshaw.Graph(graphConfigSensorType4);
     sensorType5Graph = new Rickshaw.Graph(graphConfigSensorType5);
+    sensorType6Graph = new Rickshaw.Graph(graphConfigSensorType6);
     drawGraph(sensorType1Graph, "sensorType1yAxis", "sensorType1Slider", "sensorType1Legend", sensorType1
         , graphConfigSensorType1, "chartSensorType1");
     drawGraph(sensorType2Graph, "sensorType2yAxis", "sensorType2Slider", "sensorType2Legend", sensorType2
@@ -175,6 +197,8 @@ function drawGraph_linuxdevice(from, to)
         , graphConfigSensorType4, "chartSensorType4");
     drawGraph(sensorType5Graph, "sensorType5yAxis", "sensorType5Slider", "sensorType5Legend", sensorType5
         , graphConfigSensorType5, "chartSensorType5");
+    drawGraph(sensorType6Graph, "sensorType6yAxis", "sensorType6Slider", "sensorType6Legend", sensorType6
+            , graphConfigSensorType6, "chartSensorType6");
 
     function drawGraph(graph, yAxis, slider, legend, sensorType, graphConfig, chart) {
         console.log("1");

@@ -14,7 +14,8 @@
     {"name": "batterystatussensor", "type": "FLOAT"},
     {"name": "cpuusagesensor", "type": "FLOAT"},
     {"name": "memoryspacesensor", "type": "FLOAT"},
-    {"name": "diskspacesensor", "type": "FLOAT"}
+    {"name": "diskspacesensor", "type": "FLOAT"},
+    {"name": "loadaveragesensor", "type": "FLOAT"}
   ]
 }
 
