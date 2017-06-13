@@ -44,12 +44,18 @@ for f in ./deviceConfig.properties; do
 done
 
 #install mqtt dependency
-git clone git://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.python.git
-cd org.eclipse.paho.mqtt.python
-sudo python setup.py install
+s=`dpkg -s python-pip | grep Status`
+if [[ $s == *"installed"* ]]; then
+	#installed
+	sudo pip install paho-mqtt > /dev/null 2>&1
+else
+	git clone git://git.eclipse.org/gitroot/paho/org.eclipse.paho.mqtt.python.git
+	cd org.eclipse.paho.mqtt.python
+	sudo python setup.py install
 
-sudo apt install python-pip
-sudo pip install paho-mqtt
+	sudo apt install python-pip
+	sudo pip install paho-mqtt
+fi
 
 cd $currentDir
 
