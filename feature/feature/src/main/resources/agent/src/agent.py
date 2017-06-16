@@ -252,8 +252,24 @@ def main():
     UtilsThread()
     # registerDeviceIP()  # Call the register endpoint and register Device IP
     # ListenHTTPServerThread()  # starts an HTTP Server that listens for operational commands to switch ON/OFF Led
+    
     global PUSH_INTERVAL
-    PUSH_INTERVAL = input("Whats the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute) : ")
+    try:
+        x = raw_input("Whats the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute) > ")
+        PUSH_INTERVAL = int(x)
+        print 'Setting data-push interval to ' + str(PUSH_INTERVAL) + ' seconds'
+        print " "
+    except ValueError:
+        if len(x) == 0:
+            print "Input needs to be an integer indicating the number seconds between successive data-pushes. 15 will be taken as default value"
+            print " "
+            PUSH_INTERVAL = 15
+        else:
+            # print "Oops!  That was no valid number.  Try again..."
+            print "Input needs to be an integer indicating the number seconds between successive data-pushes. 15 will be taken as default value"
+            print " "
+            PUSH_INTERVAL = 15
+
     SubscribeToMQTTQueue()  # connects and subscribes to an MQTT Queue that receives MQTT commands from the server
     DataReaderThread()  # initiates and runs the thread to continuously read temperature from DHT Sensor
 
