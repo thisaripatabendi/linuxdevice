@@ -32,7 +32,8 @@ import mqttConnector
 import running_mode
 from dataCollector import *
 
-PUSH_INTERVAL = 5000  # time interval between successive data pushes in seconds
+
+# PUSH_INTERVAL = 5000  # time interval between successive data pushes in seconds
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #       Logger defaults
@@ -218,19 +219,20 @@ class DataReaderThread(object):
                 if running_mode.RUNNING_MODE == 'N':
                     # time.sleep(PUSH_INTERVAL)
                     collectData()
-                    time.sleep(15)
+                    global PUSH_INTERVAL
+                    time.sleep(PUSH_INTERVAL)
                 else:
                     # generate random values
                     generateRandoms()
 
-                #print "############ DATA READINGS ###############"
-                #print 'BATTERY LEVEL : ' + str(iotUtils.BATTERY_LEVEL)
-                #print 'BATTERY STATUS : ' + str(iotUtils.BATTERY_STATUS)
-                #print 'CPU USAGE : ' + str(iotUtils.CPU_USAGE)
-                #print 'MEMORY SPACE : ' + str(iotUtils.MEMORY_SPACE)
-                #print 'DISK SPACE : ' + str(iotUtils.DISK_SPACE)
-                #print 'LOAD AVERAGE:' + str(iotUtils.LOAD_AVERAGE)
-                #print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+                # print "############ DATA READINGS ###############"
+                # print 'BATTERY LEVEL : ' + str(iotUtils.BATTERY_LEVEL)
+                # print 'BATTERY STATUS : ' + str(iotUtils.BATTERY_STATUS)
+                # print 'CPU USAGE : ' + str(iotUtils.CPU_USAGE)
+                # print 'MEMORY SPACE : ' + str(iotUtils.MEMORY_SPACE)
+                # print 'DISK SPACE : ' + str(iotUtils.DISK_SPACE)
+                # print 'LOAD AVERAGE:' + str(iotUtils.LOAD_AVERAGE)
+                # print "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
                 print " "
 
             except Exception, e:
@@ -250,17 +252,20 @@ def main():
     UtilsThread()
     # registerDeviceIP()  # Call the register endpoint and register Device IP
     # ListenHTTPServerThread()  # starts an HTTP Server that listens for operational commands to switch ON/OFF Led
+    global PUSH_INTERVAL
+    PUSH_INTERVAL = input("Whats the time-interval (in seconds) between successive Data-Pushes to the WSO2-DC (ex: '60' indicates 1 minute) : ")
     SubscribeToMQTTQueue()  # connects and subscribes to an MQTT Queue that receives MQTT commands from the server
     DataReaderThread()  # initiates and runs the thread to continuously read temperature from DHT Sensor
 
     # test
 
     time.sleep(10)
+
     while True:
         try:
             if iotUtils.BATTERY_LEVEL > 0:  # Push data only if there had been a successful temperature read
                 connectAndPushData()  # Push Sensor (Temperature) data to WSO2 BAM
-                time.sleep(15)
+                time.sleep(PUSH_INTERVAL)
 
         except (KeyboardInterrupt, Exception) as e:
             print "RASPBERRY_STATS: Exception in RaspberryAgentThread (either KeyboardInterrupt or Other)"
